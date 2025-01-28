@@ -15,7 +15,7 @@
  public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CalculadoraPostfix calculadora = new CalculadoraPostfix();
+        CalculadoraPostfix calculadoraPF = new CalculadoraPostfix();
         boolean CalcEncendida = true;
  
         while (CalcEncendida) {
@@ -31,7 +31,7 @@
                     System.out.print("Ingresa la operación (separada por espacios): ");
                     String operacion = scanner.nextLine();
                     try {
-                        int resultado = calculadora.evaluar(operacion);
+                        int resultado = calculadoraPF.evaluar(operacion);
                         System.out.println("El resultado de la operación: " + operacion  + "es: " + resultado);
                     } 
                      
@@ -48,7 +48,7 @@
                         System.out.println("Resultados:");
                         while ((linea = leer.readLine()) != null) {
                             try {
-                                int resultado = calculadora.evaluar(linea);
+                                int resultado = calculadoraPF.evaluar(linea);
                                 System.out.println("El resultado de la operación: " + linea + " es: " + resultado);
                             } 
 

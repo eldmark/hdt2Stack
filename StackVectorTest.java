@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
  * Descripción: Implementación de pruebas unitarias para la clase StackVector.
  * 
  */
+
 /**
  * Unit tests for the StackVector class.
  */
@@ -107,5 +108,33 @@ public class StackVectorTest {
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
             stack.peek();
         });
+    }
+
+    /**
+     * Tests pushing multiple elements and then popping them to ensure stack order
+     * is maintained.
+     */
+    @Test
+    public void testPushPopMultiple() {
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        assertEquals(3, stack.pop());
+        assertEquals(2, stack.pop());
+        assertEquals(1, stack.pop());
+        assertTrue(stack.empty());
+    }
+
+    /**
+     * Tests pushing null elements to ensure the stack handles null values
+     * correctly.
+     */
+    @Test
+    public void testPushNull() {
+        stack.push(null);
+        assertEquals(1, stack.size());
+        assertNull(stack.peek());
+        assertNull(stack.pop());
+        assertTrue(stack.empty());
     }
 }

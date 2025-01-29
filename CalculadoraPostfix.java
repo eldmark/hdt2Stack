@@ -28,6 +28,7 @@ public class CalculadoraPostfix {
             }
         }
         // Despues del calculo, el resultado esta hasta arriba de la pila
+        scanner.close();
         return stack.pop();
     }
 

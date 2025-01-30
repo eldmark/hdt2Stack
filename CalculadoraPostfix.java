@@ -1,39 +1,44 @@
 import java.util.Scanner;
-public class CalculadoraPostfix {
+import java.util.Stack;
+
+public class CalculadoraPostfix implements Interfaz {
     private Stack<Integer> stack;
 
-    //Constructor
+    // Constructor
     public CalculadoraPostfix() {
-        //Llamamos a nuestro querido stack
-        stack = new StackVector<>();
+        stack = new Stack<>(); // Usamos Stack<Integer> de Java
     }
 
+    @Override
     public int evaluar(String operacion) {
         Scanner scanner = new Scanner(operacion);
 
-        // Mientras halla algun dato en el scanner:
+        // Mientras haya algún dato en el scanner:
         while (scanner.hasNext()) {
-            // Si el siguiente dato es un entero:
             if (scanner.hasNextInt()) {
-                // hacer push
-                stack.push(scanner.nextInt()); //Metemos el entero en la pila
+                stack.push(scanner.nextInt()); // Metemos el entero en la pila
             } else {
-                // hacer pop dos veces por los dos operandos, operamos y hacemos push del resultado
-                // Funciona para varios operadores porque no termina hasta que deja de haber datos, y el resultado se mete directamente en el stack para su uso.
+                // Extraemos el operador y operamos con los últimos dos valores en la pila
                 String operador = scanner.next();
+                if (stack.size() < 2) {
+                    throw new IllegalStateException("Expresión inválida: faltan operandos.");
+                }
                 int operandoB = stack.pop();
                 int operandoA = stack.pop();
-                int result = operar(operandoA,operandoB,operador);
-                stack.push(result);
+                int resultado = operar(operandoA, operandoB, operador);
+                stack.push(resultado);
             }
         }
-        // Despues del calculo, el resultado esta hasta arriba de la pila
-        scanner.close();
-        return stack.pop();
+
+        if (stack.size() != 1) {
+            throw new IllegalStateException("Expresión inválida: demasiados operandos.");
+        }
+
+        return stack.pop(); // El resultado final queda en la cima de la pila
     }
 
-    private int operar(int operandoA, int operandoB, String operador) {
-        // Segun cada posible operador:
+    @Override
+    public int operar(int operandoA, int operandoB, String operador) {
         switch (operador) {
             case "+":
                 return operandoA + operandoB;
@@ -42,13 +47,14 @@ public class CalculadoraPostfix {
             case "*":
                 return operandoA * operandoB;
             case "/":
-                if (operandoB == 0) throw new ArithmeticException("Division por cero, regresenlo al colegio");
+                if (operandoB == 0) {
+                    throw new ArithmeticException("Error: División por cero.");
+                }
                 return operandoA / operandoB;
             case "%":
                 return operandoA % operandoB;
             default:
-                throw new IllegalArgumentException("Este operador no existe brother: " + operador);
+                throw new IllegalArgumentException("Operador no válido: " + operador);
         }
     }
 }
-

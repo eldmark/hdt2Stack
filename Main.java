@@ -32,7 +32,7 @@
                     String operacion = scanner.nextLine();
                     try {
                         int resultado = calculadoraPF.evaluar(operacion);
-                        System.out.println("El resultado de la operación: " + operacion  + "es: " + resultado);
+                        System.out.println("El resultado de la operación: " + operacion  + " es: " + resultado);
                     } 
                      
                     catch (Exception error) {

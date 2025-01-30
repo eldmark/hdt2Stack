@@ -1,44 +1,58 @@
 import java.util.Vector;
 
+/**
+ * Implementación de una pila (Stack) utilizando Vector
+ * @param <E> Elementos almacenados en el stack
+ */
 public class StackVector<E> implements Stack<E>{
 	protected Vector<E> data;
 
-	public StackVector()
-	// post: constructs a new, empty stack
-	{
+	/**
+     * Constructor que inicializa una pila vacía.
+     */
+	public StackVector() {
 		data = new Vector<E>();
 	}
 
-	public void push(E item)
-	// post: the value is added to the stack
-	//          will be popped next if no intervening push
-	{
+	/**
+     * Agrega un elemento a la pila
+     * @param item Elemento a agregar.
+     */
+	public void push(E item) {
 		data.add(item);
 	}
 
-	public E pop()
-	// pre: stack is not empty
-	// post: most recently pushed item is removed and returned
-	{
+	/**
+     * Elimina y devuelve el último elemento ingresado.
+     * @return Elemento eliminado.
+     * @throws IndexOutOfBoundsException si la pila está vacía.
+     */
+	public E pop() {
 		return data.remove(size()-1);
 	}
 
-	public E peek()
-	// pre: stack is not empty
-	// post: top value (next to be popped) is returned
-	{
+	/**
+     * Devuelve el elemento de la pila sin eliminarlo
+     * @return Elemento en la cima de la pila.
+     * @throws IndexOutOfBoundsException si la pila está vacía.
+     */
+	public E peek() {
 		return data.get(size() - 1);
 	}
 	
-	public int size()
-	// post: returns the number of elements in the stack
-	{
+	/**
+     * Devuelve el número de elementos
+     * @return Cantidad de elementos en el stack
+     */
+	public int size() {
 		return data.size();
 	}
   
-	public boolean empty()
-	// post: returns true if and only if the stack is empty
-	{
+	/**
+     * Verifica si la pila está vacía.
+     * @return true si la pila está vacía, @return false en caso contrario
+     */
+	public boolean empty() {
 		return size() == 0;
 	}
 }

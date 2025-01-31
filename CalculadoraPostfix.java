@@ -61,9 +61,6 @@ public class CalculadoraPostfix implements Interfaz {
 
     @Override
     public int operar(int operandoA, int operandoB, String operador) {
-        if (stack.size() != 1) {
-            throw new IllegalStateException("Expresión inválida: demasiados operandos.");
-        }    
 
         switch (operador) {
             case "+":
